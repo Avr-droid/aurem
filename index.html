@@ -3,791 +3,581 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AUREM — Premium Men's Chains</title>
-<meta name="description" content="Luxury men's chains at accessible prices. 18K gold plated rope chains, 925 sterling silver, and pendants.">
+<title>AUREM — Premium Jewelry for Men & Women</title>
+<meta name="description" content="AUREM — luxury men's chains and women's fine jewelry. 18K gold, 925 silver, rose gold. Free shipping over $50.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --gold: #C9A96E; --gold-l: #E8D5AA; --gold-d: #8B6914;
+  --rose: #C49585; --rose-l: #E8D5CE; --rose-d: #8C6356;
+  --ink: #0E0D0B; --ink2: #1A1814; --ink3: #232019; --ink2w: #1C1916;
+  --parch: #F9F5EE; --muted: #7A7268;
+  --serif: "Cormorant Garamond", serif; --sans: "Montserrat", sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--ink); color: var(--parch); overflow-x: hidden; }
 
-  :root {
-    --gold: #C9A96E;
-    --gold-light: #E8D5AA;
-    --gold-dark: #8B6914;
-    --ink: #0E0D0B;
-    --ink2: #1C1A16;
-    --ink3: #252218;
-    --parchment: #F9F5EE;
-    --muted: #7A7268;
-    --serif: 'Cormorant Garamond', serif;
-    --sans: 'Montserrat', sans-serif;
+/* ── PAGES ── */
+.page { display: none; }
+.page.active { display: block; }
 
-    /* =============================================
-       STRIPE PAYMENT LINKS — replace these with
-       your actual Stripe Payment Link URLs
-       Create them at: dashboard.stripe.com → Payment Links
-    ============================================= */
-    --stripe-soleil: "https://buy.stripe.com/YOUR_SOLEIL_LINK";
-    --stripe-argent: "https://buy.stripe.com/YOUR_ARGENT_LINK";
-    --stripe-etoile: "https://buy.stripe.com/YOUR_ETOILE_LINK";
-  }
+/* ── SHARED ── */
+.banner { background: var(--gold); color: var(--ink); text-align: center; padding: 10px 24px; font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; }
+.banner span { opacity: 0.6; font-weight: 400; margin-left: 12px; letter-spacing: 1px; }
 
-  html { scroll-behavior: smooth; }
-  body { font-family: var(--sans); background: var(--ink); color: var(--parchment); overflow-x: hidden; }
+nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 48px; background: rgba(14,13,11,0.97); border-bottom: 1px solid rgba(201,169,110,0.15); backdrop-filter: blur(8px); }
+.logo { font-family: var(--serif); font-size: 20px; font-weight: 600; letter-spacing: 6px; color: var(--gold); cursor: pointer; background: none; border: none; }
+.nav-links { display: flex; gap: 24px; list-style: none; align-items: center; }
+.nav-links button { font-size: 9px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: rgba(249,245,238,0.5); background: none; border: none; cursor: pointer; font-family: var(--sans); transition: color 0.2s; padding: 0; }
+.nav-links button:hover { color: var(--gold); }
+.nav-links .wl:hover { color: var(--rose); }
+.nsep { width: 1px; height: 14px; background: rgba(201,169,110,0.2); display: inline-block; }
 
-  /* ─── UTILITY ─── */
-  .page { display: none; }
-  .page.active { display: block; }
+.btn-g { padding: 13px 34px; background: var(--gold); color: var(--ink); font-size: 9px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; border: none; cursor: pointer; font-family: var(--sans); transition: all 0.25s; }
+.btn-g:hover { background: var(--gold-l); transform: translateY(-1px); }
+.btn-r { padding: 13px 34px; background: var(--rose); color: #fff; font-size: 9px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; border: none; cursor: pointer; font-family: var(--sans); transition: all 0.25s; }
+.btn-r:hover { background: var(--rose-l); color: var(--ink); transform: translateY(-1px); }
+.btn-ghost { padding: 12px 28px; background: transparent; color: rgba(249,245,238,0.55); font-size: 9px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; border: 1px solid rgba(201,169,110,0.25); cursor: pointer; font-family: var(--sans); transition: all 0.25s; }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 
-  /* ─── NAV ─── */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 48px;
-    background: rgba(14,13,11,0.97);
-    border-bottom: 1px solid rgba(201,169,110,0.15);
-    backdrop-filter: blur(8px);
-  }
+.toast { position: fixed; bottom: 28px; right: 28px; z-index: 999; background: var(--ink3); border: 1px solid rgba(201,169,110,0.35); padding: 12px 20px; font-size: 10px; letter-spacing: 1px; color: var(--gold); opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.toast.show { opacity: 1; }
 
-  .nav-logo {
-    font-family: var(--serif); font-size: 20px; font-weight: 600;
-    letter-spacing: 6px; color: var(--gold); cursor: pointer; text-decoration: none;
-  }
+/* ── HOME ── */
+.ticker { overflow: hidden; border-top: 1px solid rgba(201,169,110,0.15); border-bottom: 1px solid rgba(201,169,110,0.15); padding: 11px 0; background: rgba(201,169,110,0.02); }
+.ticker-track { display: flex; white-space: nowrap; animation: ticker 32s linear infinite; }
+.ti { display: inline-flex; align-items: center; gap: 18px; padding: 0 28px; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 400; }
+.ti.r { color: var(--rose); }
+.td { width: 3px; height: 3px; background: currentColor; border-radius: 50%; opacity: 0.5; }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-  .nav-links { display: flex; gap: 28px; list-style: none; }
-  .nav-links button {
-    font-size: 9px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
-    color: rgba(249,245,238,0.5); background: none; border: none; cursor: pointer;
-    font-family: var(--sans); transition: color 0.2s; padding: 0;
-  }
-  .nav-links button:hover { color: var(--gold); }
+.hero { min-height: 92vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px; position: relative; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 55% 45% at 35% 60%, rgba(201,169,110,0.06) 0%, transparent 65%), radial-gradient(ellipse 45% 40% at 70% 55%, rgba(196,149,133,0.04) 0%, transparent 65%); pointer-events: none; }
+.hero-line { width: 1px; height: 56px; background: linear-gradient(to bottom, transparent, var(--gold), transparent); margin: 0 auto 28px; animation: pulse 3s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity: 0.35; } 50% { opacity: 1; } }
+.hero-eye { font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.hero-title { font-family: var(--serif); font-size: clamp(48px,8vw,96px); font-weight: 300; line-height: 1; margin-bottom: 16px; }
+.hero-title em { font-style: italic; color: var(--gold-l); }
+.hero-sub { font-family: var(--serif); font-size: clamp(14px,2vw,18px); font-weight: 300; font-style: italic; color: rgba(249,245,238,0.45); margin-bottom: 44px; max-width: 520px; line-height: 1.7; }
+.hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
 
-  .nav-right { display: flex; align-items: center; gap: 16px; }
-  .cart-btn {
-    display: flex; align-items: center; gap: 8px;
-    padding: 8px 16px; border: 1px solid rgba(201,169,110,0.35);
-    background: transparent; color: var(--gold); font-family: var(--sans);
-    font-size: 9px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
-    cursor: pointer; transition: all 0.2s;
-  }
-  .cart-btn:hover { background: rgba(201,169,110,0.08); }
-  .cart-count {
-    background: var(--gold); color: var(--ink); width: 18px; height: 18px;
-    border-radius: 50%; font-size: 9px; font-weight: 600;
-    display: flex; align-items: center; justify-content: center;
-  }
+.split { display: grid; grid-template-columns: 1fr 1fr; min-height: 70vh; }
+.split-panel { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 48px; position: relative; overflow: hidden; cursor: pointer; transition: filter 0.3s; }
+.split-panel:hover { filter: brightness(1.07); }
+.split-panel.men { background: var(--ink2); border-right: 1px solid rgba(201,169,110,0.1); }
+.split-panel.women { background: var(--ink2w); }
+.split-panel::before { content: ""; position: absolute; inset: 0; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.split-panel.men::before { background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(201,169,110,0.06) 0%, transparent 70%); }
+.split-panel.women::before { background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(196,149,133,0.07) 0%, transparent 70%); }
+.split-panel:hover::before { opacity: 1; }
+.split-eye { font-size: 8px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 16px; }
+.split-eye.g { color: var(--gold); } .split-eye.r { color: var(--rose); }
+.split-title { font-family: var(--serif); font-size: clamp(32px,4vw,56px); font-weight: 300; line-height: 1.05; margin-bottom: 12px; }
+.split-title em.g { font-style: italic; color: var(--gold-l); }
+.split-title em.r { font-style: italic; color: var(--rose-l); }
+.split-sub { font-family: var(--serif); font-size: 14px; font-style: italic; color: rgba(249,245,238,0.38); margin-bottom: 32px; line-height: 1.6; }
+.split-line { width: 36px; height: 1px; margin: 0 auto 32px; }
+.split-line.g { background: rgba(201,169,110,0.4); } .split-line.r { background: rgba(196,149,133,0.4); }
+.split-tags { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+.split-tag { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; padding: 5px 12px; border: 1px solid; }
+.split-tag.g { border-color: rgba(201,169,110,0.25); color: rgba(249,245,238,0.5); }
+.split-tag.r { border-color: rgba(196,149,133,0.25); color: rgba(249,245,238,0.5); }
 
-  /* ─── TOAST ─── */
-  .toast {
-    position: fixed; bottom: 28px; right: 28px; z-index: 999;
-    background: var(--ink3); border: 1px solid rgba(201,169,110,0.35);
-    padding: 12px 20px; font-size: 10px; letter-spacing: 1px; color: var(--gold);
-    opacity: 0; transition: opacity 0.3s; pointer-events: none;
-  }
-  .toast.show { opacity: 1; }
+.story { background: var(--ink2); padding: 80px 0; }
+.story-in { max-width: 1200px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.story-vis { position: relative; height: 420px; display: flex; align-items: center; justify-content: center; }
+.s-ring { position: absolute; border-radius: 50%; border: 1px solid; }
+.story-txt h2 { font-family: var(--serif); font-size: 40px; font-weight: 300; line-height: 1.15; margin-bottom: 20px; }
+.story-txt h2 em { font-style: italic; color: var(--gold-l); display: block; }
+.story-txt p { font-size: 12px; line-height: 1.9; color: rgba(249,245,238,0.5); margin-bottom: 14px; font-weight: 300; }
+.story-stats { display: flex; gap: 36px; margin-top: 36px; padding-top: 36px; border-top: 1px solid rgba(201,169,110,0.15); }
+.stat-n { font-family: var(--serif); font-size: 34px; font-weight: 300; display: block; }
+.stat-n.g { color: var(--gold); } .stat-n.r { color: var(--rose); }
+.stat-l { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
 
-  /* ─── HERO ─── */
-  .hero {
-    min-height: 92vh; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; text-align: center;
-    padding: 80px 24px; position: relative; overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 60% 50% at 50% 60%, rgba(201,169,110,0.07) 0%, transparent 70%),
-      radial-gradient(ellipse 30% 25% at 20% 20%, rgba(201,169,110,0.03) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .hero-line {
-    width: 1px; height: 56px;
-    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-    margin: 0 auto 28px;
-    animation: pulse 3s ease-in-out infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:0.35} 50%{opacity:1} }
+.trust { padding: 40px 48px; border-top: 1px solid rgba(201,169,110,0.1); border-bottom: 1px solid rgba(201,169,110,0.1); }
+.trust-in { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+.trust-item { display: flex; align-items: center; gap: 12px; }
+.trust-icon { width: 34px; height: 34px; border: 1px solid; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.trust-icon.g { border-color: rgba(201,169,110,0.3); color: var(--gold); }
+.trust-icon.r { border-color: rgba(196,149,133,0.35); color: var(--rose); }
+.trust-title { font-size: 10px; font-weight: 500; letter-spacing: 1px; margin-bottom: 2px; }
+.trust-sub { font-size: 9px; color: var(--muted); }
 
-  .hero-eyebrow { font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
-  .hero-title { font-family: var(--serif); font-size: clamp(48px,8vw,96px); font-weight: 300; line-height: 1; margin-bottom: 16px; }
-  .hero-title em { font-style: italic; color: var(--gold-light); }
-  .hero-sub { font-family: var(--serif); font-size: clamp(15px,2vw,19px); font-weight: 300; font-style: italic; color: rgba(249,245,238,0.45); margin-bottom: 44px; max-width: 460px; }
+.email-sec { padding: 80px 48px; text-align: center; }
+.email-eye { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.email-title { font-family: var(--serif); font-size: clamp(28px,4vw,48px); font-weight: 300; margin-bottom: 10px; }
+.email-sub { font-size: 12px; color: rgba(249,245,238,0.45); margin-bottom: 36px; font-weight: 300; }
+.email-form { display: flex; max-width: 420px; margin: 0 auto; }
+.email-input { flex: 1; padding: 13px 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(201,169,110,0.22); border-right: none; color: var(--parch); font-family: var(--sans); font-size: 11px; outline: none; transition: border-color 0.2s; }
+.email-input::placeholder { color: var(--muted); }
+.email-input:focus { border-color: var(--gold); }
+.email-submit { padding: 13px 22px; background: var(--gold); color: var(--ink); font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.2s; }
+.email-submit:hover { background: var(--gold-l); }
 
-  .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 64px; }
-  .btn-primary {
-    padding: 13px 34px; background: var(--gold); color: var(--ink);
-    font-size: 9px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
-    border: none; cursor: pointer; font-family: var(--sans); transition: all 0.25s;
-  }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
-  .btn-ghost {
-    padding: 13px 34px; background: transparent; color: var(--parchment);
-    font-size: 9px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
-    border: 1px solid rgba(249,245,238,0.2); cursor: pointer; font-family: var(--sans); transition: all 0.25s;
-  }
-  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+footer { padding: 40px 48px; border-top: 1px solid rgba(201,169,110,0.12); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+.footer-logo { font-family: var(--serif); font-size: 18px; font-weight: 600; letter-spacing: 5px; color: var(--gold); }
+.footer-tag { font-size: 8px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-top: 3px; }
+.footer-links { display: flex; gap: 24px; list-style: none; }
+.footer-links button { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); background: none; border: none; cursor: pointer; font-family: var(--sans); padding: 0; transition: color 0.2s; }
+.footer-links button:hover { color: var(--gold); }
+.footer-copy { font-size: 9px; color: rgba(122,114,104,0.5); letter-spacing: 1px; }
 
-  /* ─── TICKER ─── */
-  .ticker {
-    overflow: hidden;
-    border-top: 1px solid rgba(201,169,110,0.18);
-    border-bottom: 1px solid rgba(201,169,110,0.18);
-    padding: 11px 0; background: rgba(201,169,110,0.03);
-  }
-  .ticker-track {
-    display: flex; gap: 0; white-space: nowrap;
-    animation: scroll 24s linear infinite;
-  }
-  .ticker-item {
-    display: inline-flex; align-items: center; gap: 18px; padding: 0 28px;
-    font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 400;
-  }
-  .ticker-dot { width: 3px; height: 3px; background: var(--gold); border-radius: 50%; opacity: 0.5; }
-  @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+/* ── COLLECTION PAGE SHARED ── */
+.col-hero { padding: 56px 48px 40px; border-bottom: 1px solid rgba(201,169,110,0.1); }
+.col-hero.r { border-bottom-color: rgba(196,149,133,0.12); }
+.col-back { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); background: none; border: none; cursor: pointer; font-family: var(--sans); padding: 0; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.col-back.g:hover { color: var(--gold); }
+.col-back.r:hover { color: var(--rose); }
+.col-eye { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 8px; }
+.col-eye.g { color: var(--gold); } .col-eye.r { color: var(--rose); }
+.col-title { font-family: var(--serif); font-size: clamp(32px,5vw,60px); font-weight: 300; margin-bottom: 8px; }
+.col-title em.g { font-style: italic; color: var(--gold-l); }
+.col-title em.r { font-style: italic; color: var(--rose-l); }
+.col-sub { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
 
-  /* ─── SECTION HEADER ─── */
-  .section { padding: 80px 48px; max-width: 1200px; margin: 0 auto; }
-  .section-header { display: flex; align-items: baseline; gap: 20px; margin-bottom: 48px; }
-  .section-num { font-size: 10px; color: var(--gold); letter-spacing: 2px; font-weight: 400; }
-  .section-title { font-family: var(--serif); font-size: clamp(28px,3.5vw,44px); font-weight: 300; }
-  .section-title em { font-style: italic; color: var(--gold-light); }
-  .section-line { flex: 1; height: 1px; background: linear-gradient(to right, rgba(201,169,110,0.3), transparent); }
+/* ── PRODUCT GRID ── */
+.prod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; padding: 2px 48px 80px; }
+.prod-card { background: var(--ink2); position: relative; overflow: hidden; display: flex; flex-direction: column; }
+.prod-card.r { background: var(--ink2w); }
+.prod-card-img { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+.prod-card-img svg { width: 55%; height: 55%; }
+.prod-card-badge { position: absolute; top: 12px; left: 12px; font-size: 7px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 8px; border: 1px solid rgba(201,169,110,0.4); color: var(--gold); background: rgba(14,13,11,0.85); }
+.prod-card-badge.r { border-color: rgba(196,149,133,0.4); color: var(--rose); }
+.prod-card-sale { position: absolute; top: 12px; right: 12px; font-size: 7px; letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px; font-weight: 600; }
+.prod-card-sale.g { background: var(--gold); color: var(--ink); }
+.prod-card-sale.r { background: var(--rose); color: #fff; }
+.prod-card-body { padding: 20px 20px 24px; flex: 1; display: flex; flex-direction: column; }
+.prod-card-type { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; }
+.prod-card-type.g { color: var(--gold); } .prod-card-type.r { color: var(--rose); }
+.prod-card-name { font-family: var(--serif); font-size: 24px; font-weight: 300; margin-bottom: 4px; }
+.prod-card-desc { font-size: 10px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; flex: 1; }
+.prod-card-price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; }
+.prod-card-price { font-family: var(--serif); font-size: 28px; font-weight: 300; }
+.prod-card-was { font-size: 13px; color: var(--muted); text-decoration: line-through; font-family: var(--serif); }
+.prod-card-buy { display: block; width: 100%; padding: 12px; font-size: 8px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer; font-family: var(--sans); transition: all 0.2s; text-decoration: none; text-align: center; }
+.prod-card-buy.g { background: var(--gold); color: var(--ink); }
+.prod-card-buy.g:hover { background: var(--gold-l); }
+.prod-card-buy.r { background: var(--rose); color: #fff; }
+.prod-card-buy.r:hover { background: var(--rose-l); color: var(--ink); }
+.prod-secure { font-size: 9px; color: var(--muted); letter-spacing: 1px; text-align: center; padding: 0 48px 48px; }
 
-  /* ─── PRODUCT GRID ─── */
-  .products-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
-  .product-card {
-    position: relative; background: var(--ink2); overflow: hidden;
-    cursor: pointer; transition: transform 0.28s; aspect-ratio: 3/4;
-    display: flex; flex-direction: column; justify-content: flex-end;
-  }
-  .product-card:hover { transform: scale(1.015); z-index: 2; }
-  .product-visual { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-  .product-badge {
-    position: absolute; top: 14px; left: 14px;
-    font-size: 7px; letter-spacing: 2px; text-transform: uppercase;
-    padding: 3px 8px; border: 1px solid rgba(201,169,110,0.4); color: var(--gold);
-    background: rgba(14,13,11,0.85);
-  }
-  .product-info { position: relative; padding: 20px; background: linear-gradient(to top, var(--ink2) 55%, transparent); }
-  .product-type { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
-  .product-name { font-family: var(--serif); font-size: 22px; font-weight: 400; margin-bottom: 6px; }
-  .product-name em { font-style: italic; color: var(--gold-light); }
-  .product-price { font-size: 10px; color: rgba(249,245,238,0.55); letter-spacing: 1px; }
-  .product-arrow {
-    position: absolute; bottom: 20px; right: 20px; width: 32px; height: 32px;
-    border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center;
-    color: var(--gold); font-size: 14px; opacity: 0; transition: opacity 0.2s;
-  }
-  .product-card:hover .product-arrow { opacity: 1; }
+/* ── WOMEN COMING SOON ── */
+.coming-wrap { max-width: 640px; margin: 0 auto; padding: 80px 48px; text-align: center; }
+.coming-line { width: 1px; height: 56px; background: linear-gradient(to bottom, transparent, var(--rose), transparent); margin: 0 auto 28px; }
+.coming-eye { font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--rose); margin-bottom: 18px; }
+.coming-title { font-family: var(--serif); font-size: clamp(32px,5vw,56px); font-weight: 300; line-height: 1.1; margin-bottom: 12px; }
+.coming-title em { font-style: italic; color: var(--rose-l); }
+.coming-sub { font-family: var(--serif); font-size: 16px; font-style: italic; color: rgba(249,245,238,0.4); margin-bottom: 40px; line-height: 1.7; }
+.coming-cats { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+.coming-cat { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; padding: 7px 16px; border: 1px solid rgba(196,149,133,0.25); color: rgba(249,245,238,0.45); }
+.coming-email { display: flex; max-width: 380px; margin: 0 auto; }
+.coming-input { flex: 1; padding: 13px 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(196,149,133,0.25); border-right: none; color: var(--parch); font-family: var(--sans); font-size: 11px; outline: none; transition: border-color 0.2s; }
+.coming-input::placeholder { color: var(--muted); }
+.coming-input:focus { border-color: var(--rose); }
+.coming-submit { padding: 13px 20px; background: var(--rose); color: #fff; font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.2s; }
+.coming-submit:hover { background: var(--rose-l); color: var(--ink); }
+.coming-note { font-size: 9px; color: var(--muted); letter-spacing: 1px; margin-top: 14px; }
 
-  /* ─── PRODUCT DETAIL PAGE ─── */
-  .prod-detail { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 60px); }
-  .prod-left {
-    background: var(--ink2); display: flex; align-items: center; justify-content: center;
-    padding: 60px; position: relative; min-height: 500px;
-  }
-  .prod-back {
-    position: absolute; top: 24px; left: 24px;
-    font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);
-    cursor: pointer; border: none; background: none; font-family: var(--sans); transition: color 0.2s; display: flex; align-items: center; gap: 6px; padding: 0;
-  }
-  .prod-back:hover { color: var(--gold); }
-  .prod-right { padding: 60px 48px; display: flex; flex-direction: column; justify-content: center; }
-
-  .p-eye { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
-  .p-name { font-family: var(--serif); font-size: 42px; font-weight: 300; line-height: 1.05; margin-bottom: 6px; }
-  .p-name em { font-style: italic; color: var(--gold-light); }
-  .p-tagline { font-family: var(--serif); font-size: 15px; font-style: italic; color: rgba(249,245,238,0.38); margin-bottom: 20px; }
-  .p-divider { width: 36px; height: 1px; background: rgba(201,169,110,0.35); margin-bottom: 20px; }
-  .p-desc { font-size: 12px; line-height: 1.9; color: rgba(249,245,238,0.5); font-weight: 300; margin-bottom: 24px; }
-
-  .variant-label { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-  .variant-row { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 16px; }
-  .variant-btn {
-    padding: 6px 13px; font-size: 9px; letter-spacing: 1px;
-    border: 1px solid rgba(201,169,110,0.18); color: rgba(249,245,238,0.45);
-    background: transparent; cursor: pointer; font-family: var(--sans); transition: all 0.2s; border-radius: 1px;
-  }
-  .variant-btn:hover, .variant-btn.selected { border-color: var(--gold); color: var(--gold); background: rgba(201,169,110,0.06); }
-
-  .price-row { display: flex; align-items: baseline; gap: 14px; margin: 20px 0; }
-  .p-price { font-family: var(--serif); font-size: 36px; font-weight: 300; }
-  .p-ship { font-size: 9px; color: var(--muted); letter-spacing: 1px; }
-
-  .add-to-cart {
-    width: 100%; padding: 14px; background: var(--gold); color: var(--ink);
-    font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 3px;
-    text-transform: uppercase; border: none; cursor: pointer; transition: all 0.2s; margin-bottom: 8px;
-  }
-  .add-to-cart:hover { background: var(--gold-light); }
-  .buy-now {
-    width: 100%; padding: 13px; background: transparent; color: rgba(249,245,238,0.55);
-    font-family: var(--sans); font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
-    border: 1px solid rgba(201,169,110,0.25); cursor: pointer; transition: all 0.2s; margin-bottom: 8px;
-  }
-  .buy-now:hover { border-color: var(--gold); color: var(--gold); }
-
-  .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 20px; }
-  .spec-item { padding: 10px; border: 1px solid rgba(201,169,110,0.1); background: rgba(255,255,255,0.02); }
-  .spec-key { font-size: 7px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
-  .spec-val { font-size: 10px; color: rgba(249,245,238,0.65); }
-
-  /* ─── CART PAGE ─── */
-  .cart-page { max-width: 600px; margin: 0 auto; padding: 48px 28px 80px; }
-  .cart-hd { font-family: var(--serif); font-size: 34px; font-weight: 300; margin-bottom: 4px; }
-  .cart-hd em { font-style: italic; color: var(--gold-light); }
-  .cart-subtitle { font-size: 10px; color: var(--muted); letter-spacing: 1px; margin-bottom: 32px; }
-  .cart-empty { text-align: center; padding: 64px 0; }
-  .cart-empty p { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
-  .cart-item { display: flex; gap: 16px; padding: 18px 0; border-bottom: 1px solid rgba(201,169,110,0.1); align-items: center; }
-  .ci-thumb { width: 68px; height: 68px; background: var(--ink2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .ci-info { flex: 1; }
-  .ci-name { font-family: var(--serif); font-size: 18px; font-weight: 300; margin-bottom: 3px; }
-  .ci-detail { font-size: 9px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
-  .ci-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
-  .ci-price { font-family: var(--serif); font-size: 20px; font-weight: 300; }
-  .ci-remove {
-    font-size: 8px; letter-spacing: 1px; color: var(--muted); cursor: pointer;
-    border: none; background: none; font-family: var(--sans); text-transform: uppercase; padding: 0; transition: color 0.2s;
-  }
-  .ci-remove:hover { color: #E24B4A; }
-
-  .cart-totals { margin-top: 24px; }
-  .total-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 10px; color: var(--muted); letter-spacing: 1px; }
-  .total-row.grand { border-top: 1px solid rgba(201,169,110,0.2); margin-top: 8px; padding-top: 18px; }
-  .grand-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
-  .grand-val { font-family: var(--serif); font-size: 30px; font-weight: 300; }
-
-  .checkout-btn {
-    width: 100%; padding: 14px; background: var(--gold); color: var(--ink);
-    font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 3px;
-    text-transform: uppercase; border: none; cursor: pointer; transition: all 0.2s; margin-top: 20px;
-  }
-  .checkout-btn:hover { background: var(--gold-light); }
-  .checkout-note { text-align: center; font-size: 9px; color: var(--muted); letter-spacing: 1px; margin-top: 10px; }
-  .payment-badges { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
-  .pay-badge { font-size: 7px; letter-spacing: 1px; text-transform: uppercase; color: rgba(249,245,238,0.25); border: 1px solid rgba(201,169,110,0.12); padding: 3px 8px; }
-  .continue-btn {
-    width: 100%; padding: 12px; margin-top: 10px;
-    background: transparent; color: rgba(249,245,238,0.35);
-    font-family: var(--sans); font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
-    border: 1px solid rgba(201,169,110,0.15); cursor: pointer; transition: all 0.2s;
-  }
-  .continue-btn:hover { border-color: var(--gold); color: var(--gold); }
-
-  /* ─── STORY SECTION ─── */
-  .story-section { background: var(--ink2); padding: 80px 0; }
-  .story-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-  .story-visual { position: relative; height: 420px; display: flex; align-items: center; justify-content: center; }
-  .story-ring { position: absolute; border-radius: 50%; border: 1px solid; }
-  .story-text h2 { font-family: var(--serif); font-size: 40px; font-weight: 300; line-height: 1.15; margin-bottom: 20px; }
-  .story-text h2 em { font-style: italic; color: var(--gold-light); display: block; }
-  .story-text p { font-size: 12px; line-height: 1.9; color: rgba(249,245,238,0.5); margin-bottom: 14px; font-weight: 300; }
-  .story-stats { display: flex; gap: 36px; margin-top: 36px; padding-top: 36px; border-top: 1px solid rgba(201,169,110,0.15); }
-  .stat-num { font-family: var(--serif); font-size: 34px; font-weight: 300; color: var(--gold); display: block; }
-  .stat-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
-
-  /* ─── TRUST BAR ─── */
-  .trust-bar { padding: 40px 48px; border-top: 1px solid rgba(201,169,110,0.1); border-bottom: 1px solid rgba(201,169,110,0.1); }
-  .trust-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
-  .trust-item { display: flex; align-items: center; gap: 12px; }
-  .trust-icon { width: 34px; height: 34px; border: 1px solid rgba(201,169,110,0.3); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 14px; flex-shrink: 0; }
-  .trust-title { font-size: 10px; font-weight: 500; letter-spacing: 1px; margin-bottom: 2px; }
-  .trust-sub { font-size: 9px; color: var(--muted); }
-
-  /* ─── EMAIL SECTION ─── */
-  .email-section { padding: 80px 48px; text-align: center; }
-  .email-eyebrow { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
-  .email-title { font-family: var(--serif); font-size: clamp(28px,4vw,48px); font-weight: 300; margin-bottom: 10px; }
-  .email-sub { font-size: 12px; color: rgba(249,245,238,0.45); margin-bottom: 36px; font-weight: 300; }
-  .email-form { display: flex; max-width: 420px; margin: 0 auto; }
-  .email-input {
-    flex: 1; padding: 13px 18px; background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(201,169,110,0.22); border-right: none;
-    color: var(--parchment); font-family: var(--sans); font-size: 11px; letter-spacing: 1px; outline: none; transition: border-color 0.2s;
-  }
-  .email-input::placeholder { color: var(--muted); }
-  .email-input:focus { border-color: var(--gold); }
-  .email-submit {
-    padding: 13px 22px; background: var(--gold); color: var(--ink);
-    font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 2px;
-    text-transform: uppercase; border: none; cursor: pointer; white-space: nowrap; transition: background 0.2s;
-  }
-  .email-submit:hover { background: var(--gold-light); }
-
-  /* ─── FOOTER ─── */
-  footer { padding: 40px 48px; border-top: 1px solid rgba(201,169,110,0.12); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-  .footer-logo { font-family: var(--serif); font-size: 17px; font-weight: 600; letter-spacing: 5px; color: var(--gold); }
-  .footer-links { display: flex; gap: 24px; list-style: none; }
-  .footer-links button { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); background: none; border: none; cursor: pointer; font-family: var(--sans); padding: 0; transition: color 0.2s; }
-  .footer-links button:hover { color: var(--gold); }
-  .footer-copy { font-size: 9px; color: rgba(122,114,104,0.5); letter-spacing: 1px; }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 768px) {
-    nav { padding: 14px 20px; }
-    .nav-links { display: none; }
-    .section { padding: 48px 20px; }
-    .products-grid { grid-template-columns: 1fr 1fr; }
-    .prod-detail { grid-template-columns: 1fr; }
-    .prod-left { min-height: 300px; padding: 40px; }
-    .prod-right { padding: 32px 20px; }
-    .story-inner { grid-template-columns: 1fr; gap: 40px; padding: 0 20px; }
-    .story-visual { height: 260px; }
-    .trust-bar { padding: 28px 20px; }
-    .trust-inner { justify-content: center; }
-    .email-section { padding: 60px 20px; }
-    .email-form { flex-direction: column; }
-    .email-input { border-right: 1px solid rgba(201,169,110,0.22); border-bottom: none; }
-    footer { padding: 28px 20px; flex-direction: column; text-align: center; }
-    .footer-links { flex-wrap: wrap; justify-content: center; }
-  }
-  @media (max-width: 480px) {
-    .products-grid { grid-template-columns: 1fr; }
-    .hero-title { font-size: 42px; }
-  }
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; } .nav-links { display: none; }
+  .split { grid-template-columns: 1fr; }
+  .split-panel { padding: 56px 24px; min-height: 50vh; }
+  .split-panel.men { border-right: none; border-bottom: 1px solid rgba(201,169,110,0.1); }
+  .story-in { grid-template-columns: 1fr; gap: 40px; padding: 0 20px; }
+  .story-vis { height: 260px; }
+  .trust { padding: 28px 20px; } .trust-in { justify-content: center; }
+  .email-sec { padding: 60px 20px; } .email-form { flex-direction: column; }
+  .email-input { border-right: 1px solid rgba(201,169,110,0.22); border-bottom: none; }
+  footer { padding: 28px 20px; flex-direction: column; text-align: center; }
+  .story { padding: 60px 0; }
+  .prod-grid { grid-template-columns: 1fr 1fr; padding: 2px 16px 48px; }
+  .col-hero { padding: 36px 20px 28px; }
+  .prod-secure { padding: 0 20px 32px; }
+  .coming-wrap { padding: 60px 24px; }
+  .coming-email { flex-direction: column; }
+  .coming-input { border-right: 1px solid rgba(196,149,133,0.25); border-bottom: none; }
+}
+@media (max-width: 480px) {
+  .hero-title { font-size: 40px; } .split-title { font-size: 28px; }
+  .prod-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- NAV -->
+<!-- ═══════════════════════════════════════
+     SHARED NAV (always visible)
+═══════════════════════════════════════ -->
+<div class="banner">Launch Sale - 15% Off Everything <span>Code: AUREM15</span></div>
+
 <nav>
-  <a class="nav-logo" onclick="goPage('home')">AUREM</a>
+  <button class="logo" id="nav-logo">AUREM</button>
   <ul class="nav-links">
-    <li><button onclick="goPage('shop')">Collection</button></li>
-    <li><button onclick="scrollToStory()">About</button></li>
-    <li><button onclick="scrollToEmail()">Newsletter</button></li>
+    <li><button id="nav-men">Men's</button></li>
+    <li><button class="wl" id="nav-women">Women's</button></li>
+    <li><span class="nsep"></span></li>
+    <li><button id="nav-about">About</button></li>
   </ul>
-  <div class="nav-right">
-    <button class="cart-btn" onclick="goPage('cart')">
-      Cart <span class="cart-count" id="cart-count">0</span>
-    </button>
-  </div>
 </nav>
 
-<!-- ══════════════════════════ HOME PAGE ══════════════════════════ -->
+<!-- ═══════════════════════════════════════
+     HOME PAGE
+═══════════════════════════════════════ -->
 <div class="page active" id="page-home">
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-line"></div>
-    <p class="hero-eyebrow">Est. 2025 &nbsp;·&nbsp; Premium Men's Chains</p>
+    <p class="hero-eye">Est. 2025 &middot; Men &amp; Women's Fine Jewelry</p>
     <h1 class="hero-title">Wear What<br><em>Gold Commands.</em></h1>
-    <p class="hero-sub">Refined chains for men who move with intention. Luxury that doesn't ask permission.</p>
+    <p class="hero-sub">Men's chains and pendants. Women's fine jewelry.<br>One brand &mdash; luxury without compromise.</p>
     <div class="hero-btns">
-      <button class="btn-primary" onclick="goPage('shop')">Explore Collection</button>
-      <button class="btn-ghost" onclick="scrollToStory()">Our Story</button>
+      <button class="btn-g" id="hero-men">Shop Men's</button>
+      <button class="btn-r" id="hero-women">Shop Women's</button>
     </div>
-    <svg width="320" height="56" viewBox="0 0 320 56" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.22">
-      <g stroke="#C9A96E" stroke-width="1.4">
-        <ellipse cx="28" cy="28" rx="15" ry="8"/><ellipse cx="62" cy="28" rx="15" ry="8" transform="rotate(50 62 28)"/>
-        <ellipse cx="96" cy="28" rx="15" ry="8"/><ellipse cx="130" cy="28" rx="15" ry="8" transform="rotate(50 130 28)"/>
-        <ellipse cx="164" cy="28" rx="15" ry="8"/><ellipse cx="198" cy="28" rx="15" ry="8" transform="rotate(50 198 28)"/>
-        <ellipse cx="232" cy="28" rx="15" ry="8"/><ellipse cx="266" cy="28" rx="15" ry="8" transform="rotate(50 266 28)"/>
-        <ellipse cx="300" cy="28" rx="15" ry="8"/>
-      </g>
+    <svg style="opacity:0.2;margin-top:8px" width="340" height="56" viewBox="0 0 340 56" fill="none">
+      <g stroke="#C9A96E" stroke-width="1.4"><ellipse cx="28" cy="28" rx="15" ry="8"/><ellipse cx="62" cy="28" rx="15" ry="8" transform="rotate(50 62 28)"/><ellipse cx="96" cy="28" rx="15" ry="8"/><ellipse cx="130" cy="28" rx="15" ry="8" transform="rotate(50 130 28)"/><ellipse cx="164" cy="28" rx="15" ry="8"/></g>
+      <g stroke="#C49585" stroke-width="1.4"><ellipse cx="198" cy="28" rx="15" ry="8" transform="rotate(50 198 28)"/><ellipse cx="232" cy="28" rx="15" ry="8"/><ellipse cx="266" cy="28" rx="15" ry="8" transform="rotate(50 266 28)"/><ellipse cx="300" cy="28" rx="15" ry="8"/></g>
     </svg>
   </section>
 
-  <!-- TICKER -->
-  <div class="ticker">
-    <div class="ticker-track">
-      <span class="ticker-item">Gold Chains <span class="ticker-dot"></span></span>
-      <span class="ticker-item">Silver Chains <span class="ticker-dot"></span></span>
-      <span class="ticker-item">Pendants &amp; Charms <span class="ticker-dot"></span></span>
-      <span class="ticker-item">Free Shipping over $50 <span class="ticker-dot"></span></span>
-      <span class="ticker-item">30-Day Returns <span class="ticker-dot"></span></span>
-      <span class="ticker-item">18K Gold Plating <span class="ticker-dot"></span></span>
-      <span class="ticker-item">925 Sterling Silver <span class="ticker-dot"></span></span>
-      <span class="ticker-item">Gold Chains <span class="ticker-dot"></span></span>
-      <span class="ticker-item">Silver Chains <span class="ticker-dot"></span></span>
-      <span class="ticker-item">Pendants &amp; Charms <span class="ticker-dot"></span></span>
-      <span class="ticker-item">Free Shipping over $50 <span class="ticker-dot"></span></span>
-      <span class="ticker-item">30-Day Returns <span class="ticker-dot"></span></span>
-      <span class="ticker-item">18K Gold Plating <span class="ticker-dot"></span></span>
-      <span class="ticker-item">925 Sterling Silver <span class="ticker-dot"></span></span>
+  <div class="ticker"><div class="ticker-track">
+    <span class="ti">15% Off Launch <span class="td"></span></span>
+    <span class="ti">Gold Chains <span class="td"></span></span>
+    <span class="ti">Silver Chains <span class="td"></span></span>
+    <span class="ti r">Women's Jewelry <span class="td"></span></span>
+    <span class="ti">Free Shipping $50+ <span class="td"></span></span>
+    <span class="ti r">Rose Gold <span class="td"></span></span>
+    <span class="ti">18K Gold Plating <span class="td"></span></span>
+    <span class="ti r">Earrings &amp; Bracelets <span class="td"></span></span>
+    <span class="ti">925 Sterling Silver <span class="td"></span></span>
+    <span class="ti">15% Off Launch <span class="td"></span></span>
+    <span class="ti">Gold Chains <span class="td"></span></span>
+    <span class="ti">Silver Chains <span class="td"></span></span>
+    <span class="ti r">Women's Jewelry <span class="td"></span></span>
+    <span class="ti">Free Shipping $50+ <span class="td"></span></span>
+    <span class="ti r">Rose Gold <span class="td"></span></span>
+    <span class="ti">18K Gold Plating <span class="td"></span></span>
+    <span class="ti r">Earrings &amp; Bracelets <span class="td"></span></span>
+    <span class="ti">925 Sterling Silver <span class="td"></span></span>
+  </div></div>
+
+  <div class="split">
+    <div class="split-panel men">
+      <p class="split-eye g">AUREM &mdash; Men's</p>
+      <h2 class="split-title">Chains &amp;<br><em class="g">Pendants</em></h2>
+      <div class="split-line g"></div>
+      <p class="split-sub">18K gold plated rope chains, 925 sterling silver,<br>and iced-out pendants. Built to last.</p>
+      <div class="split-tags">
+        <span class="split-tag g">Gold Rope Chain</span>
+        <span class="split-tag g">Silver Rope Chain</span>
+        <span class="split-tag g">Pendants</span>
+      </div>
+      <button class="btn-g" id="home-men-btn">Shop Men's &rarr;</button>
+    </div>
+    <div class="split-panel women">
+      <p class="split-eye r">AUREM &mdash; Women's</p>
+      <h2 class="split-title">Fine<br><em class="r">Jewelry</em></h2>
+      <div class="split-line r"></div>
+      <p class="split-sub">Rose gold and sterling silver earrings, bracelets,<br>necklaces and rings. Crafted with care.</p>
+      <div class="split-tags">
+        <span class="split-tag r">Earrings</span>
+        <span class="split-tag r">Bracelets</span>
+        <span class="split-tag r">Necklaces</span>
+        <span class="split-tag r">Rings</span>
+      </div>
+      <button class="btn-r" id="home-women-btn">Shop Women's &rarr;</button>
     </div>
   </div>
 
-  <!-- FEATURED PRODUCTS -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-num">01</span>
-      <h2 class="section-title">The <em>Collection</em></h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="products-grid" id="home-grid"></div>
-  </div>
-
-  <!-- QUOTE -->
-  <div style="padding:60px 48px;text-align:center;position:relative;overflow:hidden">
-    <div style="font-family:var(--serif);font-size:110px;color:rgba(201,169,110,0.07);line-height:0.6;position:absolute;top:30px;left:50%;transform:translateX(-50%);pointer-events:none">"</div>
-    <p style="font-family:var(--serif);font-size:clamp(22px,3.5vw,42px);font-weight:300;font-style:italic;line-height:1.3;max-width:760px;margin:0 auto;color:rgba(249,245,238,0.8);position:relative">
-      Not every man wears jewelry.<br><em style="color:var(--gold-light);font-style:normal">The right ones do.</em>
-    </p>
-  </div>
-
-  <!-- STORY -->
-  <div class="story-section" id="story">
-    <div class="story-inner">
-      <div class="story-visual">
-        <div class="story-ring" style="width:320px;height:320px;border-color:rgba(201,169,110,0.07)"></div>
-        <div class="story-ring" style="width:240px;height:240px;border-color:rgba(201,169,110,0.11)"></div>
-        <div class="story-ring" style="width:160px;height:160px;border-color:rgba(201,169,110,0.17)"></div>
-        <div style="width:88px;height:88px;border-radius:50%;background:rgba(201,169,110,0.1);display:flex;align-items:center;justify-content:center">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <path d="M20 5 L24 16 L36 16 L27 23 L30 34 L20 27 L10 34 L13 23 L4 16 L16 16 Z" stroke="#C9A96E" stroke-width="1.2" fill="rgba(201,169,110,0.12)"/>
-          </svg>
+  <div class="story" id="about">
+    <div class="story-in">
+      <div class="story-vis">
+        <div class="s-ring" style="width:320px;height:320px;border-color:rgba(201,169,110,0.07)"></div>
+        <div class="s-ring" style="width:240px;height:240px;border-color:rgba(196,149,133,0.09)"></div>
+        <div class="s-ring" style="width:160px;height:160px;border-color:rgba(201,169,110,0.16)"></div>
+        <div style="width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,rgba(201,169,110,0.14),rgba(196,149,133,0.14));display:flex;align-items:center;justify-content:center">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M20 5 L24 16 L36 16 L27 23 L30 34 L20 27 L10 34 L13 23 L4 16 L16 16 Z" stroke="#C9A96E" stroke-width="1.2" fill="rgba(201,169,110,0.12)"/></svg>
         </div>
       </div>
-      <div class="story-text">
-        <h2>Luxury is a<br><em>standard, not a price tag.</em></h2>
-        <p>AUREM was built for the man who knows his worth — who carries himself with quiet confidence and dresses with intention. We believe premium jewelry shouldn't cost a premium.</p>
-        <p>Every chain is crafted with care, finished to feel exceptional, and priced so that looking like gold doesn't break the bank.</p>
+      <div class="story-txt">
+        <h2>One brand.<br><em>Every story.</em></h2>
+        <p>Built for the man who moves with intention and the woman who commands the room. AUREM is one brand that believes luxury belongs to everyone &mdash; without the markup.</p>
+        <p>Every piece &mdash; whether gold, silver, or rose gold &mdash; is crafted with premium materials, finished to feel exceptional, and priced so that looking like a million means spending a fraction of it.</p>
         <div class="story-stats">
-          <div><span class="stat-num">18K</span><p class="stat-label">Gold Plating</p></div>
-          <div><span class="stat-num">925</span><p class="stat-label">Sterling Silver</p></div>
-          <div><span class="stat-num">30</span><p class="stat-label">Day Returns</p></div>
+          <div><span class="stat-n g">18K</span><p class="stat-l">Gold &amp; Rose Gold</p></div>
+          <div><span class="stat-n r">925</span><p class="stat-l">Sterling Silver</p></div>
+          <div><span class="stat-n g">57+</span><p class="stat-l">Products</p></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- TRUST -->
-  <div class="trust-bar">
-    <div class="trust-inner">
-      <div class="trust-item"><div class="trust-icon">✦</div><div><p class="trust-title">Premium Plating</p><p class="trust-sub">18K gold &amp; 925 silver finish</p></div></div>
-      <div class="trust-item"><div class="trust-icon">◈</div><div><p class="trust-title">Free Shipping</p><p class="trust-sub">On all orders over $50</p></div></div>
-      <div class="trust-item"><div class="trust-icon">◇</div><div><p class="trust-title">30-Day Returns</p><p class="trust-sub">No questions asked</p></div></div>
-      <div class="trust-item"><div class="trust-icon">⬡</div><div><p class="trust-title">Secure Checkout</p><p class="trust-sub">Powered by Stripe</p></div></div>
+  <div class="trust">
+    <div class="trust-in">
+      <div class="trust-item"><div class="trust-icon g">&#10022;</div><div><p class="trust-title">18K Gold &amp; Rose Gold</p><p class="trust-sub">Premium plating on every piece</p></div></div>
+      <div class="trust-item"><div class="trust-icon r">&#10070;</div><div><p class="trust-title">Free Shipping</p><p class="trust-sub">On all orders over $50</p></div></div>
+      <div class="trust-item"><div class="trust-icon g">&#9671;</div><div><p class="trust-title">925 Sterling Silver</p><p class="trust-sub">Men's &amp; Women's collections</p></div></div>
+      <div class="trust-item"><div class="trust-icon r">&#11042;</div><div><p class="trust-title">Secure Checkout</p><p class="trust-sub">Powered by Stripe</p></div></div>
     </div>
   </div>
 
-  <!-- EMAIL -->
-  <div class="email-section" id="email">
-    <p class="email-eyebrow">Inner Circle</p>
+  <div class="email-sec">
+    <p class="email-eye">Inner Circle</p>
     <h2 class="email-title">Be First to the Drop</h2>
-    <p class="email-sub">New collections. Early access. Members-only pricing.</p>
-    <form class="email-form" onsubmit="submitEmail(event)">
+    <p class="email-sub">New drops for Men's &amp; Women's. Early access. Members-only pricing.</p>
+    <form class="email-form" id="home-email">
       <input class="email-input" type="email" placeholder="your@email.com" required>
       <button class="email-submit" type="submit">Join</button>
     </form>
   </div>
 
   <footer>
-    <div class="footer-logo">AUREM</div>
+    <div><div class="footer-logo">AUREM</div><div class="footer-tag">Men's &amp; Women's Fine Jewelry</div></div>
     <ul class="footer-links">
-      <li><button onclick="goPage('shop')">Shop</button></li>
-      <li><button onclick="scrollToStory()">About</button></li>
-      <li><button>Shipping</button></li>
-      <li><button>Contact</button></li>
+      <li><button id="ft-men">Men's</button></li>
+      <li><button id="ft-women">Women's</button></li>
+      <li><button id="ft-about">About</button></li>
       <li><button>Instagram</button></li>
+      <li><button>Contact</button></li>
     </ul>
-    <p class="footer-copy">© 2025 Aurem. All rights reserved.</p>
+    <p class="footer-copy">&copy; 2025 AUREM. All rights reserved.</p>
   </footer>
 </div>
 
-<!-- ══════════════════════════ SHOP PAGE ══════════════════════════ -->
-<div class="page" id="page-shop">
-  <div style="padding:36px 48px 24px;border-bottom:1px solid rgba(201,169,110,0.1)">
-    <p style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Aurem Collection</p>
-    <h1 style="font-family:var(--serif);font-size:clamp(28px,4vw,46px);font-weight:300">The Full <em style="font-style:italic;color:var(--gold-light)">Edit</em></h1>
-    <p style="font-size:10px;color:var(--muted);margin-top:6px;letter-spacing:1px">Gold · Silver · Pendants — all widths, all lengths</p>
-  </div>
-  <div style="display:flex;gap:5px;padding:14px 48px;border-bottom:1px solid rgba(201,169,110,0.08);flex-wrap:wrap">
-    <button class="variant-btn selected" onclick="filterShop('all',this)">All</button>
-    <button class="variant-btn" onclick="filterShop('gold',this)">Gold</button>
-    <button class="variant-btn" onclick="filterShop('silver',this)">Silver</button>
-    <button class="variant-btn" onclick="filterShop('pendant',this)">Pendants</button>
-  </div>
-  <div class="section" style="padding-top:32px">
-    <div class="products-grid" id="shop-grid"></div>
-  </div>
-  <footer>
-    <div class="footer-logo">AUREM</div>
-    <ul class="footer-links"><li><button onclick="goPage('home')">Home</button></li><li><button>Contact</button></li></ul>
-    <p class="footer-copy">© 2025 Aurem.</p>
-  </footer>
-</div>
+<!-- ═══════════════════════════════════════
+     MEN'S COLLECTION PAGE
+═══════════════════════════════════════ -->
+<div class="page" id="page-men">
 
-<!-- ══════════════════════════ PRODUCT PAGE ══════════════════════════ -->
-<div class="page" id="page-product">
-  <div class="prod-detail">
-    <div class="prod-left">
-      <button class="prod-back" onclick="history.back(); goPage(prevPage)">← Back</button>
-      <div id="product-svg"></div>
-    </div>
-    <div class="prod-right">
-      <p class="p-eye" id="detail-eye"></p>
-      <h2 class="p-name" id="detail-name"></h2>
-      <p class="p-tagline" id="detail-tagline"></p>
-      <div class="p-divider"></div>
-      <p class="p-desc" id="detail-desc"></p>
-      <div id="detail-variants"></div>
-      <div class="price-row">
-        <span class="p-price" id="detail-price">$34</span>
-        <span class="p-ship" id="detail-ship"></span>
+  <div class="col-hero">
+    <button class="col-back g" id="men-back">&#8592; Back</button>
+    <p class="col-eye g">AUREM &mdash; Men's Collection</p>
+    <h1 class="col-title">Chains &amp; <em class="g">Pendants</em></h1>
+    <p class="col-sub">18K gold plated &middot; 925 sterling silver &middot; Free shipping over $50 &middot; 15% off with code AUREM15</p>
+  </div>
+
+  <div class="prod-grid">
+
+    <!-- ── PRODUCT: THE SOLEIL ──
+         Replace YOUR_SOLEIL_STRIPE_LINK with your Stripe Payment Link
+         dashboard.stripe.com > Payment Links > Create
+         Name: "The Soleil - Gold Rope Chain"  |  Price: $64 -->
+    <div class="prod-card">
+      <div class="prod-card-img">
+        <div class="prod-card-badge">18K Gold Plated</div>
+        <div class="prod-card-sale g">15% Off</div>
+        <svg viewBox="0 0 140 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="sg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F5E09A"/><stop offset="45%" stop-color="#C9A96E"/><stop offset="100%" stop-color="#8B6914"/></linearGradient></defs>
+          <g stroke="url(#sg1)" stroke-width="2.2" fill="none" opacity="0.92">
+            <ellipse cx="70" cy="28" rx="21" ry="10" transform="rotate(0 70 28)"/>
+            <ellipse cx="70" cy="50" rx="21" ry="10" transform="rotate(68 70 50)"/>
+            <ellipse cx="70" cy="72" rx="21" ry="10" transform="rotate(0 70 72)"/>
+            <ellipse cx="70" cy="94" rx="21" ry="10" transform="rotate(68 70 94)"/>
+            <ellipse cx="70" cy="116" rx="21" ry="10" transform="rotate(0 70 116)"/>
+            <ellipse cx="70" cy="138" rx="21" ry="10" transform="rotate(68 70 138)"/>
+            <ellipse cx="70" cy="160" rx="21" ry="10" transform="rotate(0 70 160)"/>
+            <ellipse cx="70" cy="182" rx="21" ry="10" transform="rotate(68 70 182)"/>
+          </g>
+          <circle cx="70" cy="204" r="8" stroke="url(#sg1)" stroke-width="1.5" fill="none"/>
+          <line x1="70" y1="192" x2="70" y2="196" stroke="#C9A96E" stroke-width="1.5"/>
+        </svg>
       </div>
-      <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
-      <button class="buy-now" onclick="buyNow()">Buy Now — Checkout Directly</button>
-      <div class="specs-grid" id="detail-specs"></div>
+      <div class="prod-card-body">
+        <p class="prod-card-type g">Gold &middot; Rope Chain</p>
+        <p class="prod-card-name">The Soleil</p>
+        <p class="prod-card-desc">Hand-twisted links that catch light from every angle. 18K gold plated over premium stainless steel. Available in 16&quot; to 22&quot;, slim to thick.</p>
+        <div class="prod-card-price-row">
+          <span class="prod-card-price">$64</span>
+          <span class="prod-card-was">$75</span>
+        </div>
+        <a class="prod-card-buy g" href="YOUR_SOLEIL_STRIPE_LINK" target="_blank">Buy Now &rarr;</a>
+      </div>
     </div>
+
+    <!-- ── PRODUCT: THE ARGENT ──
+         Replace YOUR_ARGENT_STRIPE_LINK
+         Name: "The Argent - Silver Rope Chain"  |  Price: $60 -->
+    <div class="prod-card">
+      <div class="prod-card-img" style="background:#161412">
+        <div class="prod-card-badge">925 Sterling Silver</div>
+        <div class="prod-card-sale g">15% Off</div>
+        <svg viewBox="0 0 140 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="sg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="50%" stop-color="#B8B8B8"/><stop offset="100%" stop-color="#686868"/></linearGradient></defs>
+          <g stroke="url(#sg2)" stroke-width="2.2" fill="none" opacity="0.88">
+            <ellipse cx="70" cy="28" rx="21" ry="10" transform="rotate(0 70 28)"/>
+            <ellipse cx="70" cy="50" rx="21" ry="10" transform="rotate(68 70 50)"/>
+            <ellipse cx="70" cy="72" rx="21" ry="10" transform="rotate(0 70 72)"/>
+            <ellipse cx="70" cy="94" rx="21" ry="10" transform="rotate(68 70 94)"/>
+            <ellipse cx="70" cy="116" rx="21" ry="10" transform="rotate(0 70 116)"/>
+            <ellipse cx="70" cy="138" rx="21" ry="10" transform="rotate(68 70 138)"/>
+            <ellipse cx="70" cy="160" rx="21" ry="10" transform="rotate(0 70 160)"/>
+            <ellipse cx="70" cy="182" rx="21" ry="10" transform="rotate(68 70 182)"/>
+          </g>
+          <circle cx="70" cy="204" r="8" stroke="url(#sg2)" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+      <div class="prod-card-body">
+        <p class="prod-card-type g">Silver &middot; Rope Chain</p>
+        <p class="prod-card-name">The Argent</p>
+        <p class="prod-card-desc">Pure 925 sterling rope. Heavier in hand than it looks. Wear solo or layer over the Soleil for a mixed-metal moment. 16&quot; to 22&quot;.</p>
+        <div class="prod-card-price-row">
+          <span class="prod-card-price">$60</span>
+          <span class="prod-card-was">$70</span>
+        </div>
+        <a class="prod-card-buy g" href="YOUR_ARGENT_STRIPE_LINK" target="_blank">Buy Now &rarr;</a>
+      </div>
+    </div>
+
+    <!-- ── PRODUCT: THE ETOILE ──
+         Replace YOUR_ETOILE_STRIPE_LINK
+         Name: "The Etoile - Gold Pendant"  |  Price: $53 -->
+    <div class="prod-card">
+      <div class="prod-card-img" style="background:#111009">
+        <div class="prod-card-badge">18K Gold Plated</div>
+        <div class="prod-card-sale g">15% Off</div>
+        <svg viewBox="0 0 140 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="sg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F5E09A"/><stop offset="100%" stop-color="#C9A96E"/></linearGradient></defs>
+          <g stroke="#C9A96E" stroke-width="1.4" fill="none" opacity="0.6">
+            <ellipse cx="70" cy="44" rx="17" ry="7"/>
+            <ellipse cx="70" cy="57" rx="17" ry="7" transform="rotate(65 70 57)"/>
+            <ellipse cx="70" cy="70" rx="17" ry="7"/>
+          </g>
+          <line x1="70" y1="77" x2="70" y2="100" stroke="#C9A96E" stroke-width="1.5"/>
+          <path d="M70 100 L80 122 L100 122 L85 136 L91 158 L70 144 L49 158 L55 136 L40 122 L60 122 Z" stroke="url(#sg3)" stroke-width="1.8" fill="rgba(201,169,110,0.1)"/>
+          <circle cx="70" cy="36" r="6" stroke="#C9A96E" stroke-width="1.5" fill="none"/>
+          <path d="M66 31 Q70 24 74 31" stroke="#C9A96E" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+      <div class="prod-card-body">
+        <p class="prod-card-type g">Gold &middot; Pendant</p>
+        <p class="prod-card-name">The Etoile</p>
+        <p class="prod-card-desc">Five-point geometry in 18K gold plate. Substantial enough to notice, refined enough for anywhere. Fine rope chain included with every order.</p>
+        <div class="prod-card-price-row">
+          <span class="prod-card-price">$53</span>
+          <span class="prod-card-was">$62</span>
+        </div>
+        <a class="prod-card-buy g" href="YOUR_ETOILE_STRIPE_LINK" target="_blank">Buy Now &rarr;</a>
+      </div>
+    </div>
+
   </div>
+
+  <p class="prod-secure">Secure checkout &middot; SSL encrypted &middot; Visa, Mastercard, Amex, Apple Pay, Google Pay</p>
+
+  <footer>
+    <div><div class="footer-logo">AUREM</div></div>
+    <ul class="footer-links">
+      <li><button id="men-ft-home">Home</button></li>
+      <li><button id="men-ft-women">Women's</button></li>
+      <li><button>Contact</button></li>
+    </ul>
+    <p class="footer-copy">&copy; 2025 AUREM. All rights reserved.</p>
+  </footer>
 </div>
 
-<!-- ══════════════════════════ CART PAGE ══════════════════════════ -->
-<div class="page" id="page-cart">
-  <div class="cart-page">
-    <h2 class="cart-hd">Your <em>Cart</em></h2>
-    <p class="cart-subtitle" id="cart-subtitle"></p>
-    <div id="cart-items-container"></div>
-    <div id="cart-footer-container"></div>
+<!-- ═══════════════════════════════════════
+     WOMEN'S COLLECTION PAGE
+═══════════════════════════════════════ -->
+<div class="page" id="page-women">
+
+  <div class="col-hero r" style="border-bottom-color:rgba(196,149,133,0.12);background:var(--ink2w)">
+    <button class="col-back r" id="women-back">&#8592; Back</button>
+    <p class="col-eye r">AUREM &mdash; Women's Collection</p>
+    <h1 class="col-title">Fine <em class="r">Jewelry</em></h1>
+    <p class="col-sub" style="color:var(--muted)">Earrings &middot; Bracelets &middot; Necklaces &middot; Rings &middot; Rose Gold &middot; 925 Silver</p>
   </div>
+
+  <div style="background:linear-gradient(to bottom,var(--ink2w),var(--ink2))">
+    <div class="coming-wrap">
+      <div class="coming-line"></div>
+      <p class="coming-eye">Coming Soon</p>
+      <h2 class="coming-title">The Women's<br><em>Collection</em></h2>
+      <p class="coming-sub">
+        57+ pieces of 18K rose gold and 925 sterling silver jewelry &mdash;
+        earrings, bracelets, necklaces and rings.<br>
+        Dropping soon. Be the first to know.
+      </p>
+      <div class="coming-cats">
+        <span class="coming-cat">Earrings</span>
+        <span class="coming-cat">Bracelets</span>
+        <span class="coming-cat">Necklaces</span>
+        <span class="coming-cat">Rings</span>
+      </div>
+      <form class="coming-email" id="women-email">
+        <input class="coming-input" type="email" placeholder="your@email.com" required>
+        <button class="coming-submit" type="submit">Notify Me</button>
+      </form>
+      <p class="coming-note">No spam. First access when the collection drops.</p>
+    </div>
+  </div>
+
+  <footer style="background:var(--ink2)">
+    <div><div class="footer-logo">AUREM</div></div>
+    <ul class="footer-links">
+      <li><button id="women-ft-home">Home</button></li>
+      <li><button id="women-ft-men">Men's</button></li>
+      <li><button>Contact</button></li>
+    </ul>
+    <p class="footer-copy">&copy; 2025 AUREM. All rights reserved.</p>
+  </footer>
 </div>
 
 <script>
-// ─── DATA ───────────────────────────────────────────────────────
-const PRODUCTS = [
-  {
-    id: 'soleil', cat: 'gold',
-    badge: '18K Gold Plated', eye: 'Gold · Rope Chain',
-    name: 'The <em>Soleil</em>', tagline: '"Twisted like ambition. Finished like gold."',
-    desc: 'Hand-twisted links catch light from every angle — fluid movement that reads effortlessly expensive. 18K gold plated over premium stainless steel. Built to last, priced to wear daily. The chain that does the talking for you.',
-    basePrice: 34,
-    lengths: ['16"', '18"', '20"', '22"'],
-    widths: ['Slim — 2mm', 'Medium — 4mm', 'Thick — 8mm'],
-    priceAdj: { w: [0, 6, 12], l: [-4, 0, 4, 8] },
-    specs: [
-      { k: 'Material', v: 'Stainless steel' }, { k: 'Plating', v: '18K gold, 3 micron' },
-      { k: 'Clasp', v: 'Lobster claw' }, { k: 'Care', v: 'Water resistant' }
-    ],
-    svgType: 'gold',
-    // Replace with your actual Stripe Payment Link:
-    stripeLink: 'https://buy.stripe.com/YOUR_SOLEIL_LINK'
-  },
-  {
-    id: 'argent', cat: 'silver',
-    badge: '925 Sterling Silver', eye: 'Silver · Rope Chain',
-    name: 'The <em>Argent</em>', tagline: '"Cold like steel. Clean like intention."',
-    desc: 'Pure 925 sterling rope — heavier in hand than it looks, louder in a room than expected. The twist creates depth you won\'t find at twice the price. Wear solo or layer it over the Soleil for a mixed-metal moment.',
-    basePrice: 36,
-    lengths: ['16"', '18"', '20"', '22"'],
-    widths: ['Slim — 2mm', 'Medium — 4mm', 'Thick — 8mm'],
-    priceAdj: { w: [0, 6, 12], l: [-4, 0, 4, 8] },
-    specs: [
-      { k: 'Material', v: '925 sterling silver' }, { k: 'Purity', v: '92.5% pure silver' },
-      { k: 'Clasp', v: 'Lobster claw' }, { k: 'Care', v: 'Anti-tarnish coated' }
-    ],
-    svgType: 'silver',
-    stripeLink: 'https://buy.stripe.com/YOUR_ARGENT_LINK'
-  },
-  {
-    id: 'etoile', cat: 'pendant',
-    badge: '18K Gold Plated', eye: 'Gold · Pendant',
-    name: 'The <em>Étoile</em>', tagline: '"Every icon needs a symbol."',
-    desc: 'Five-point geometry in 18K gold plate. Substantial enough to notice, refined enough to wear anywhere. A fine rope chain is included with every order. This is the piece that starts conversations.',
-    basePrice: 28,
-    lengths: ['16"', '18"', '20"', '22"'],
-    widths: ['Small — 18mm', 'Medium — 24mm', 'Large — 32mm'],
-    priceAdj: { w: [0, 8, 16], l: [-2, 0, 2, 4] },
-    specs: [
-      { k: 'Material', v: 'Stainless steel' }, { k: 'Plating', v: '18K gold, 3 micron' },
-      { k: 'Chain', v: 'Included, slim rope' }, { k: 'Finish', v: 'High polish' }
-    ],
-    svgType: 'pendant',
-    stripeLink: 'https://buy.stripe.com/YOUR_ETOILE_LINK'
-  }
-];
-
-// ─── SVG TEMPLATES ──────────────────────────────────────────────
-function getSVG(type, size = 140) {
-  const h = Math.round(size * 1.55);
-  if (type === 'gold') return `<svg width="${size}" height="${h}" viewBox="0 0 ${size} ${h}" fill="none"><defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F5E09A"/><stop offset="45%" stop-color="#C9A96E"/><stop offset="100%" stop-color="#8B6914"/></linearGradient></defs><g stroke="url(#gg)" stroke-width="2.2" fill="none" opacity="0.92">${[28,50,72,94,116,138,160,182].map((y,i)=>`<ellipse cx="${size/2}" cy="${y}" rx="${size*0.15}" ry="${size*0.07}" transform="rotate(${i%2?68:0} ${size/2} ${y})"/>`).join('')}</g><circle cx="${size/2}" cy="${h-14}" r="7" stroke="url(#gg)" stroke-width="1.5" fill="none"/><line x1="${size/2}" y1="${h-21}" x2="${size/2}" y2="${h-21+6}" stroke="#C9A96E" stroke-width="1.5"/></svg>`;
-  if (type === 'silver') return `<svg width="${size}" height="${h}" viewBox="0 0 ${size} ${h}" fill="none"><defs><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="50%" stop-color="#B8B8B8"/><stop offset="100%" stop-color="#686868"/></linearGradient></defs><g stroke="url(#sg)" stroke-width="2.2" fill="none" opacity="0.88">${[28,50,72,94,116,138,160,182].map((y,i)=>`<ellipse cx="${size/2}" cy="${y}" rx="${size*0.15}" ry="${size*0.07}" transform="rotate(${i%2?68:0} ${size/2} ${y})"/>`).join('')}</g><circle cx="${size/2}" cy="${h-14}" r="7" stroke="url(#sg)" stroke-width="1.5" fill="none"/><line x1="${size/2}" y1="${h-21}" x2="${size/2}" y2="${h-21+6}" stroke="#B8B8B8" stroke-width="1.5"/></svg>`;
-  return `<svg width="${size}" height="${h}" viewBox="0 0 ${size} ${h}" fill="none"><defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F5E09A"/><stop offset="100%" stop-color="#C9A96E"/></linearGradient></defs><g stroke="url(#pg)" stroke-width="1.5" fill="none" opacity="0.65"><ellipse cx="${size/2}" cy="44" rx="${size*0.12}" ry="7"/><ellipse cx="${size/2}" cy="56" rx="${size*0.12}" ry="7" transform="rotate(65 ${size/2} 56)"/><ellipse cx="${size/2}" cy="68" rx="${size*0.12}" ry="7"/></g><line x1="${size/2}" y1="75" x2="${size/2}" y2="96" stroke="#C9A96E" stroke-width="1.5"/><path d="M${size/2} 96 L${size/2+9} 116 L${size/2+27} 116 L${size/2+14} 128 L${size/2+19} 148 L${size/2} 136 L${size/2-19} 148 L${size/2-14} 128 L${size/2-27} 116 L${size/2-9} 116 Z" stroke="url(#pg)" stroke-width="1.8" fill="rgba(201,169,110,0.1)"/><circle cx="${size/2}" cy="37" r="5" stroke="url(#pg)" stroke-width="1.5" fill="none"/><path d="M${size/2-4} 33 Q${size/2} 27 ${size/2+4} 33" stroke="#C9A96E" stroke-width="1.5" fill="none"/></svg>`;
-}
-
-// ─── STATE ──────────────────────────────────────────────────────
-let cart = [];
-let curProduct = null;
-let selLength = 1;
-let selWidth = 0;
-let prevPage = 'home';
-
-// ─── RENDER GRIDS ───────────────────────────────────────────────
-function renderGrid(containerId, products) {
-  const el = document.getElementById(containerId);
-  el.innerHTML = products.map(p => `
-    <div class="product-card" onclick="openProduct('${p.id}', '${containerId === 'home-grid' ? 'home' : 'shop'}')">
-      <div class="product-visual">
-        <div class="product-badge">${p.badge}</div>
-        ${getSVG(p.svgType, 100)}
-      </div>
-      <div class="product-info">
-        <p class="product-type">${p.eye}</p>
-        <h3 class="product-name">${p.name}</h3>
-        <p class="product-price">From $${p.basePrice + p.priceAdj.l[0]}</p>
-      </div>
-      <div class="product-arrow">→</div>
-    </div>`).join('');
-}
-
-// ─── NAVIGATION ─────────────────────────────────────────────────
 function goPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll(".page").forEach(function(p) { p.classList.remove("active"); });
+  document.getElementById("page-" + id).classList.add("active");
   window.scrollTo(0, 0);
 }
-
-function filterShop(cat, btn) {
-  document.querySelectorAll('#page-shop .variant-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  const filtered = cat === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cat === cat);
-  renderGrid('shop-grid', filtered);
+function scrollTo2(id) {
+  var el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth" });
+}
+function toast(msg) {
+  var t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(function() { t.classList.remove("show"); }, 2600);
 }
 
-function openProduct(id, from) {
-  prevPage = from || 'shop';
-  curProduct = PRODUCTS.find(p => p.id === id);
-  selLength = 1; selWidth = 0;
-  document.getElementById('product-svg').innerHTML = getSVG(curProduct.svgType, 180);
-  document.getElementById('detail-eye').textContent = curProduct.eye;
-  document.getElementById('detail-name').innerHTML = curProduct.name;
-  document.getElementById('detail-tagline').textContent = curProduct.tagline;
-  document.getElementById('detail-desc').textContent = curProduct.desc;
-  document.getElementById('detail-specs').innerHTML = curProduct.specs.map(s =>
-    `<div class="spec-item"><p class="spec-key">${s.k}</p><p class="spec-val">${s.v}</p></div>`).join('');
-  renderVariants();
-  updateDetailPrice();
-  goPage('product');
-}
+// Nav
+document.getElementById("nav-logo").addEventListener("click", function() { goPage("home"); });
+document.getElementById("nav-men").addEventListener("click", function() { goPage("men"); });
+document.getElementById("nav-women").addEventListener("click", function() { goPage("women"); });
+document.getElementById("nav-about").addEventListener("click", function() { goPage("home"); setTimeout(function() { scrollTo2("about"); }, 80); });
 
-function renderVariants() {
-  document.getElementById('detail-variants').innerHTML = `
-    <p class="variant-label">Length</p>
-    <div class="variant-row">${curProduct.lengths.map((l, i) =>
-      `<button class="variant-btn${i === selLength ? ' selected' : ''}" onclick="selVar(this,'l',${i})">${l}</button>`).join('')}</div>
-    <p class="variant-label" style="margin-top:4px">${curProduct.cat === 'pendant' ? 'Pendant size' : 'Width'}</p>
-    <div class="variant-row">${curProduct.widths.map((w, i) =>
-      `<button class="variant-btn${i === selWidth ? ' selected' : ''}" onclick="selVar(this,'w',${i})">${w}</button>`).join('')}</div>`;
-}
+// Home buttons
+document.getElementById("hero-men").addEventListener("click", function() { goPage("men"); });
+document.getElementById("hero-women").addEventListener("click", function() { goPage("women"); });
+document.getElementById("home-men-btn").addEventListener("click", function() { goPage("men"); });
+document.getElementById("home-women-btn").addEventListener("click", function() { goPage("women"); });
+document.getElementById("ft-men").addEventListener("click", function() { goPage("men"); });
+document.getElementById("ft-women").addEventListener("click", function() { goPage("women"); });
+document.getElementById("ft-about").addEventListener("click", function() { goPage("home"); setTimeout(function() { scrollTo2("about"); }, 80); });
 
-function selVar(btn, type, idx) {
-  const row = btn.parentElement;
-  row.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  if (type === 'l') selLength = idx; else selWidth = idx;
-  updateDetailPrice();
-}
+// Men's page
+document.getElementById("men-back").addEventListener("click", function() { goPage("home"); });
+document.getElementById("men-ft-home").addEventListener("click", function() { goPage("home"); });
+document.getElementById("men-ft-women").addEventListener("click", function() { goPage("women"); });
 
-function updateDetailPrice() {
-  if (!curProduct) return;
-  const price = curProduct.basePrice + curProduct.priceAdj.w[selWidth] + curProduct.priceAdj.l[selLength];
-  document.getElementById('detail-price').textContent = '$' + price;
-  const cartTotal = cart.reduce((s, i) => s + i.price, 0);
-  const remaining = 50 - (cartTotal + price);
-  document.getElementById('detail-ship').textContent =
-    remaining <= 0 ? 'Free shipping applied' : 'Add $' + remaining + ' more for free shipping';
-}
+// Women's page
+document.getElementById("women-back").addEventListener("click", function() { goPage("home"); });
+document.getElementById("women-ft-home").addEventListener("click", function() { goPage("home"); });
+document.getElementById("women-ft-men").addEventListener("click", function() { goPage("men"); });
 
-// ─── CART ────────────────────────────────────────────────────────
-function addToCart() {
-  if (!curProduct) return;
-  const price = curProduct.basePrice + curProduct.priceAdj.w[selWidth] + curProduct.priceAdj.l[selLength];
-  const name = curProduct.name.replace(/<[^>]+>/g, '').trim();
-  const detail = curProduct.lengths[selLength] + ' · ' + curProduct.widths[selWidth];
-  cart.push({ id: Date.now(), productId: curProduct.id, name, detail, price, svgType: curProduct.svgType });
-  updateCartCount();
-  showToast(name + ' added to cart');
-}
-
-function buyNow() {
-  if (!curProduct) return;
-  window.open(curProduct.stripeLink, '_blank');
-}
-
-function removeFromCart(id) {
-  cart = cart.filter(i => i.id !== id);
-  updateCartCount();
-  renderCart();
-}
-
-function updateCartCount() {
-  document.getElementById('cart-count').textContent = cart.length;
-}
-
-function renderCart() {
-  const sub = document.getElementById('cart-subtitle');
-  const items = document.getElementById('cart-items-container');
-  const footer = document.getElementById('cart-footer-container');
-
-  if (cart.length === 0) {
-    sub.textContent = '';
-    items.innerHTML = `<div class="cart-empty"><p>Your cart is empty.</p><button class="btn-primary" onclick="goPage('shop')">Continue Shopping</button></div>`;
-    footer.innerHTML = '';
-    return;
-  }
-
-  sub.textContent = cart.length + ' item' + (cart.length > 1 ? 's' : '');
-  items.innerHTML = cart.map(item => `
-    <div class="cart-item">
-      <div class="ci-thumb">${getSVG(item.svgType, 52)}</div>
-      <div class="ci-info">
-        <p class="ci-name">${item.name}</p>
-        <p class="ci-detail">${item.detail}</p>
-      </div>
-      <div class="ci-right">
-        <span class="ci-price">$${item.price}</span>
-        <button class="ci-remove" onclick="removeFromCart(${item.id})">Remove</button>
-      </div>
-    </div>`).join('');
-
-  const subtotal = cart.reduce((s, i) => s + i.price, 0);
-  const freeShipping = subtotal >= 50;
-  const shipping = freeShipping ? 0 : 6.99;
-  const grand = subtotal + shipping;
-
-  // Get first product's stripe link for cart checkout
-  // For a real multi-item cart you'd use Stripe's API or a backend
-  const firstLink = PRODUCTS.find(p => p.id === cart[0].productId)?.stripeLink || '#';
-
-  footer.innerHTML = `
-    <div class="cart-totals">
-      <div class="total-row"><span>Subtotal</span><span>$${subtotal.toFixed(2)}</span></div>
-      <div class="total-row"><span>Shipping</span><span style="color:${freeShipping ? 'var(--gold)' : 'var(--muted)'}">${freeShipping ? 'Free' : '$6.99'}</span></div>
-      <div class="total-row grand"><span class="grand-label">Total</span><span class="grand-val">$${grand.toFixed(2)}</span></div>
-      <button class="checkout-btn" onclick="window.open('${firstLink}','_blank')">Checkout with Stripe →</button>
-      <p class="checkout-note">Secure · SSL Encrypted · Powered by Stripe</p>
-      <div class="payment-badges">
-        <span class="pay-badge">Visa</span><span class="pay-badge">Mastercard</span>
-        <span class="pay-badge">Amex</span><span class="pay-badge">Apple Pay</span><span class="pay-badge">Google Pay</span>
-      </div>
-      <button class="continue-btn" onclick="goPage('shop')">Continue Shopping</button>
-    </div>`;
-}
-
-// ─── UTILS ───────────────────────────────────────────────────────
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2400);
-}
-
-function scrollToStory() { goPage('home'); setTimeout(() => document.getElementById('story').scrollIntoView({ behavior: 'smooth' }), 100); }
-function scrollToEmail() { goPage('home'); setTimeout(() => document.getElementById('email').scrollIntoView({ behavior: 'smooth' }), 100); }
-
-function submitEmail(e) {
-  e.preventDefault();
-  showToast('Welcome to the inner circle.');
-  e.target.reset();
-}
-
-// ─── INIT ────────────────────────────────────────────────────────
-renderGrid('home-grid', PRODUCTS);
-renderGrid('shop-grid', PRODUCTS);
+// Email forms
+document.getElementById("home-email").addEventListener("submit", function(e) {
+  e.preventDefault(); toast("Welcome to the inner circle."); e.target.reset();
+});
+document.getElementById("women-email").addEventListener("submit", function(e) {
+  e.preventDefault(); toast("You are on the list. First to know when we drop."); e.target.reset();
+});
 </script>
 </body>
 </html>
